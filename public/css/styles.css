@@ -1,4 +1,195 @@
-/******* Change Box Model ***************/
+/* base styles, mobile */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fff;
+  color: #222;
+  line-height: 1.6;
+}
+
+
+body {
+  background: url("/images/site/checkerboard.jpg") repeat;
+}
+
+
+/* layout wrapper */
+
+#wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/* header */
+
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: #f8f8f8;
+  border-bottom: 2px solid #222;
+}
+
+#top-header a {
+  text-decoration: none;
+  color: #222;
+  font-weight: bold;
+}
+
+#tools a {
+  font-size: 0.9rem;
+  color: #444;
+}
+
+
+/* navigation */
+nav {
+  background: #222;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+nav li {
+  color: #fff;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+nav li:hover {
+  background: #444;
+}
+
+
+/* main content */
+main {
+  padding: 1rem;
+}
+
+
+/* welcome section */
+.hero {
+  text-align: center;
+}
+
+.hero img {
+  max-width: 100%;
+  height: auto;
+}
+
+.hero h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero .btn {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #0077cc;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.hero .btn:hover {
+  background: #005fa3;
+}
+
+
+/* reviews and upgrades */
+.reviews, .upgrades {
+  margin-top: 2rem;
+}
+
+.reviews h2,
+.upgrades h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+}
+
+.reviews ul {
+  padding-left: 1rem;
+}
+
+.upgrades-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.upgrades-grid a {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: #222;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.upgrades-grid img {
+  max-width: 100%;
+  border: 2px solid #222;
+  border-radius: 4px;
+}
+
+
+/* footer */
+footer {
+  background: #f8f8f8;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #444;
+  border-top: 2px solid #222;
+}
+
+
+/* larger screens */
+@media screen and (min-width: 768px) {
+  main {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+  }
+
+  .hero {
+    grid-column: 1 / -1;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .hero-text {
+    max-width: 50%;
+  }
+
+  .hero img {
+    max-width: 45%;
+  }
+
+  .reviews, .upgrades {
+    margin-top: 0;
+  }
+}
+
+
+/* change box model */
 *,
 *:before,
 *:after {
