@@ -195,3 +195,198 @@ footer {
 *:after {
   box-sizing: border-box;
 }
+
+/* accessibility helpers */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  background: #fff;
+  padding: 0.5rem 1rem;
+  border: 2px solid #222;
+  z-index: 9999;
+}
+
+/* visually hidden but available to screen readers */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+
+/* error view */
+.error-message {
+  max-width: 800px;
+  background: #fff6f6;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 6px;
+}
+
+.error-message code {
+  display: block;
+  white-space: pre-wrap;
+  background: #fff0f0;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+
+/* vehicle detail layout */
+#vehicle-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.vehicle-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+}
+
+.vehicle-info {
+  padding: 0.5rem 0;
+}
+
+.vehicle-info h2 {
+  margin: 0 0 0.5rem 0;
+}
+
+.vehicle-info .price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0077cc;
+  margin: 0.25rem 0;
+}
+
+.vehicle-info .miles {
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+/* Larger screens: image and info side-by-side */
+@media screen and (min-width: 768px) {
+  #vehicle-detail {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  /* constrain overall detail area so it doesn't stretch too wide */
+  #vehicle-detail {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .vehicle-image {
+    flex: 1 1 60%;
+    padding-right: 1rem;
+    min-width: 0; /* allow image to shrink properly */
+  }
+
+  /* make the info column a narrower sidebar */
+  .vehicle-info {
+    flex: 0 0 340px;
+    padding-left: 1rem;
+  }
+}
+
+/* hide the big page h1 on large screens for the detail page (title sits in the info column) */
+@media screen and (min-width: 768px) {
+  h1.detail-title {
+    /* keep it in the accessibility tree but visually hidden */
+    position: absolute !important;
+    height: 1px; width: 1px;
+    overflow: hidden; clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+  }
+}
+
+/* richer image layout */
+.vehicle-image .main-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+  border: 1px solid #ddd;
+}
+
+.vehicle-image .thumbs {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.vehicle-image .thumb img {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.vehicle-info .action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.vehicle-info .btn {
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.6rem 0.9rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.vehicle-info .btn.primary {
+  background: #2d8f3a;
+  color: #fff;
+}
+
+.vehicle-info .btn.outline {
+  background: #fff;
+  border: 1px solid #ccc;
+  color: #222;
+}
+
+.vehicle-info .price {
+  color: #1a73e8;
+  font-size: 1.5rem;
+  margin: 0.25rem 0 0.75rem 0;
+}
+
+.vehicle-info .dealer-contact {
+  margin-top: 1rem;
+  background: #f6f6f6;
+  padding: 0.75rem;
+  border-radius: 6px;
+}
+
+@media screen and (min-width: 1024px) {
+  .vehicle-image .thumb img {
+    width: 100px;
+    height: 75px;
+  }
+  .vehicle-info .action-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

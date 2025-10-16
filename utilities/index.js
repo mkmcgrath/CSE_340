@@ -59,5 +59,66 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
+/* ****************************************
+ * Middleware For Handling Errors
+ * Wrap other function in this for 
+ * General Error Handling
+ **************************************** */
+Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
+
+/* **************************************
+ * Build a single vehicle detail HTML
+ * Expects a vehicle object with fields like
+ * inv_make, inv_model, inv_year, inv_price,
+ * inv_miles, inv_image, inv_description, etc.
+ ************************************** */
+Util.buildVehicleDetail = async function(vehicle) {
+  if(!vehicle) return ''
+  // Build a richer layout: left = images (main + thumbs), right = info + actions
+  let detail = '<div id="vehicle-detail">'
+
+  // Left column: images
+  detail += '<div class="vehicle-image">'
+  detail += '<div class="main-image">'
+  detail += '<img src="' + vehicle.inv_image + '" alt="' + vehicle.inv_make + ' ' + vehicle.inv_model + '" />'
+  detail += '</div>'
+  // thumbnails (if thumbnail available) -- include the main thumbnail as one
+  detail += '<div class="thumbs">'
+  if (vehicle.inv_thumbnail) {
+    detail += '<a href="' + vehicle.inv_image + '" class="thumb"><img src="' + vehicle.inv_thumbnail + '" alt="thumbnail"/></a>'
+  }
+  // include main image as fallback thumbnail
+  detail += '<a href="' + vehicle.inv_image + '" class="thumb"><img src="' + vehicle.inv_image + '" alt="image"/></a>'
+  detail += '</div>'
+  detail += '</div>'
+
+  // Right column: info and actions
+  detail += '<div class="vehicle-info">'
+  detail += '<h2>' + vehicle.inv_make + ' ' + vehicle.inv_model + ' <span class="year">(' + vehicle.inv_year + ')</span></h2>'
+  detail += '<p class="price">' + new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(vehicle.inv_price) + '</p>'
+  detail += '<p class="miles">Mileage: ' + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + ' miles</p>'
+  if(vehicle.inv_color) detail += '<p><strong>Color:</strong> ' + vehicle.inv_color + '</p>'
+  if(vehicle.inv_description) detail += '<p class="desc">' + vehicle.inv_description + '</p>'
+
+  // Action buttons similar to the example
+  detail += '<div class="action-buttons">'
+  detail += '<a class="btn primary" href="#">Start My Purchase</a>'
+  detail += '<a class="btn outline" href="#">Contact Us</a>'
+  detail += '<a class="btn outline" href="#">Schedule Test Drive</a>'
+  detail += '<a class="btn outline" href="#">Apply for Financing</a>'
+  detail += '</div>'
+
+  // Dealer contact / callout
+  detail += '<div class="dealer-contact">'
+  detail += '<p><strong>Call Us</strong></p>'
+  detail += '<p class="phone">801-396-7886</p>'
+  detail += '</div>'
+
+  detail += '</div>'
+
+  detail += '</div>'
+  return detail
+}
 
 module.exports = Util

@@ -1,0 +1,16 @@
+<!-- Error view: displays a title and an unescaped message passed from the controller -->
+
+<% if (title) { %>
+	<h1><%= title %></h1>
+<% } else { %>
+	<h1>Application Error</h1>
+<% } %>
+
+<p>Sorry — something went wrong. Here's the error message:</p>
+
+<div class="error-message">
+	<%- message %>
+</div>
+
+<p><a href="/">Return to Home</a></p>
+

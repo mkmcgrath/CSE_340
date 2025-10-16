@@ -1,0 +1,23 @@
+<!-- vehicle detail view -->
+
+<% if (title) { %>
+  <h1 class="detail-title"><%= title %></h1>
+<% } else { %>
+  <h1 class="detail-title">Vehicle Detail</h1>
+<% } %>
+
+<%- detail %>
+
+<!-- additional vehicle data (fallback) -->
+<% if (vehicle) { %>
+  <section class="vehicle-data">
+    <h3>Details</h3>
+    <dl>
+      <dt>Make</dt><dd><%= vehicle.inv_make %></dd>
+      <dt>Model</dt><dd><%= vehicle.inv_model %></dd>
+      <dt>Year</dt><dd><%= vehicle.inv_year %></dd>
+      <dt>Price</dt><dd><%= new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(vehicle.inv_price) %></dd>
+      <dt>Mileage</dt><dd><%= new Intl.NumberFormat('en-US').format(vehicle.inv_miles) %> miles</dd>
+    </dl>
+  </section>
+<% } %>
