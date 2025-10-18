@@ -74,6 +74,26 @@ nav li:hover {
   background: #444;
 }
 
+/* ensure anchor links inside the nav are white and fill the list item
+   (makes the entire area clickable and overrides browser default link colors) */
+nav a {
+  color: #fff;
+  text-decoration: none;
+  display: block; /* let the <a> fill the <li> so clicks work anywhere */
+}
+
+/* kep visited links readable and provide clear hover/focus states */
+nav a:visited {
+  color: #fff;
+}
+
+nav a:hover,
+nav a:focus {
+  color: #fff;
+  background: #444;
+  outline: none;
+}
+
 
 /* main content */
 main {
