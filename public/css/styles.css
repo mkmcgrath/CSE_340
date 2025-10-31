@@ -9,6 +9,203 @@ html, body {
   line-height: 1.6;
 }
 
+/* Login and Registration Form Styles */
+.login-container,
+.registration-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.registration-container {
+  max-width: 600px; /* Increased width for registration form */
+}
+
+.password-group {
+  position: relative;
+  margin-bottom: 2rem; /* Extra space for password requirements */
+}
+
+.password-input-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Increased gap between password input and button */
+  margin-bottom: 1rem;
+}
+
+.password-input-group input {
+  flex: 1;
+  height: 2.5rem; /* Taller input field */
+}
+
+.password-input-group button {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-input-group button:hover {
+  background: #f0f0f0;
+}
+
+.password-requirements {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+}
+
+.password-requirements p {
+  margin: 0 0 0.5rem 0;
+  font-weight: bold;
+  color: #333;
+}
+
+.password-requirements ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  list-style-type: none;
+}
+
+.password-requirements li {
+  margin: 0.5rem 0;
+  color: #666;
+  position: relative;
+  transition: all 0.3s ease;
+  padding-left: 1.5rem;
+}
+
+.password-requirements li:before {
+  content: "○";
+  position: absolute;
+  left: 0;
+  color: #666;
+}
+
+.password-requirements li[style*="color: rgb(76, 175, 80)"]::before {
+  content: "●";
+  color: #4CAF50;
+}
+
+.form-group {
+  margin-bottom: 2rem; /* Increased spacing between form groups */
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-weight: bold;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  height: 2.5rem;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #4c96d7;
+  box-shadow: 0 0 0 2px rgba(76, 150, 215, 0.1);
+}
+
+.form-group button[type="submit"] {
+  width: 100%;
+  padding: 1rem;
+  background-color: #4c96d7;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  height: auto;
+  margin-top: 1rem;
+}
+
+.form-group button:hover {
+  background-color: #2d7bb7;
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.register-link a {
+  color: #4c96d7;
+  text-decoration: none;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+/* Notice styling for validation errors */
+.notice {
+  background-color: #ff0000;
+  color: #fff;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+  list-style-position: inside;
+}
+
+.notice li {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+/* Form validation styles */
+input:required:invalid {
+  border-color: #ff4444;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff4444" width="24px" height="24px"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>');
+  background-position: right 8px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 32px;
+}
+
+input:required:valid {
+  border-color: #4CAF50;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234CAF50" width="24px" height="24px"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>');
+  background-position: right 8px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 32px;
+}
+
+input[type="password"]:required:invalid,
+input[type="password"]:required:valid {
+  background-image: none;
+  padding-right: 0.5rem;
+}
+
+.password-info {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0.5rem 0;
+  line-height: 1.4;
+}
+
 
 body {
   background: url("/images/site/checkerboard.jpg") repeat;
@@ -92,6 +289,20 @@ nav a:focus {
   color: #fff;
   background: #444;
   outline: none;
+}
+
+
+/* notice and error formatting */
+.error {
+  list-style: none;
+  color: red;
+  font-weight: bold;
+}
+
+.notice {
+  list-style: none;
+  color: goldenrod;
+  font-weight: bold;
 }
 
 

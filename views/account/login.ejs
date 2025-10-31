@@ -1,0 +1,57 @@
+<%- messages() %>
+
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } else { %>
+  <h1>Content Title</h1>
+<% } %>
+
+<% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <%  }) %>
+  </ul>
+<% } %>
+
+<% if (messages() && messages().length > 0) { %>
+  <div class="flash-messages">
+    <%- messages() %>
+  </div>
+<% } %>
+
+<div class="login-container">
+  <form id="loginForm" action="/account/login" method="post">
+    <div class="form-group">
+      <label for="account_email">Email:</label>
+      <input type="email" id="account_email" name="account_email" required placeholder="Enter a valid email address" value="<%= locals.account_email ? account_email : '' %>">
+    </div>
+    <div class="form-group password-group">
+      <label for="account_password">Password:</label>
+      <span class="password-info">Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>
+      <div class="password-input-group">
+        <input type="password" id="account_password" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+        <button type="button" id="showPassword" aria-label="Show password">👁️</button>
+      </div>
+    </div>
+    <div class="form-group">
+      <button type="submit">Login</button>
+    </div>
+  </form>
+  <div class="register-link">
+    <p>No account? <a href="/account/register">Sign-up</a></p>
+  </div>
+</div>
+
+<script>
+document.getElementById('showPassword').addEventListener('click', function() {
+  const passwordInput = document.getElementById('account_password');
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    this.textContent = '🔒';
+  } else {
+    passwordInput.type = 'password';
+    this.textContent = '👁️';
+  }
+});
+</script>

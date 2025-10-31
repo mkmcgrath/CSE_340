@@ -1,0 +1,110 @@
+<%- messages() %>
+
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } else { %>
+  <h1>Content Title</h1>
+<% } %>
+
+<% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <%  }) %>
+  </ul>
+<% } %>
+
+<% if (messages() && messages().length > 0) { %>
+  <div class="flash-messages">
+    <%- messages() %>
+  </div>
+<% } %>
+
+<div class="registration-container">
+  <form id="registrationForm" action="/account/register" method="post">
+    <div class="form-group">
+      <label for="account_firstname">First Name:</label>
+      <input type="text" id="account_firstname" name="account_firstname" required 
+        value="<%= locals.account_firstname ? account_firstname : '' %>">
+    </div>
+        <div class="form-group">
+      <label for="account_lastname">Last Name:</label>
+      <input type="text" id="account_lastname" name="account_lastname" required
+        value="<%= locals.account_lastname ? account_lastname : '' %>">
+    </div>
+    <div class="form-group">
+      <label for="account_email">Email:</label>
+      <input type="email" id="account_email" name="account_email" required
+        value="<%= locals.account_email ? account_email : '' %>">
+    <div class="form-group password-group">
+      <label for="account_password">Password:</label>
+      <span class="password-info">Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>
+      <div class="password-input-group">
+        <input type="password" id="account_password" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" />
+        <button type="button" id="showPassword" aria-label="Show password">👁️</button>
+      </div>
+      <div class="password-requirements">
+        <ul id="passwordChecklist">
+          <li data-requirement="length">At least 12 characters long</li>
+          <li data-requirement="capital">Contain at least 1 capital letter</li>
+          <li data-requirement="number">Contain at least 1 number</li>
+          <li data-requirement="special">Contain at least 1 special character</li>
+        </ul>
+      </div>
+    </div>
+    <div class="form-group">
+      <button type="submit" id="registerBtn">Register</button>
+    </div>
+  </form>
+</div>
+
+<script>
+document.getElementById('showPassword').addEventListener('click', function() {
+  const passwordInput = document.getElementById('account_password');
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    this.textContent = '🔒';
+  } else {
+    passwordInput.type = 'password';
+    this.textContent = '👁️';
+  }
+});
+
+// Password validation
+const passwordInput = document.getElementById('account_password');
+const registerBtn = document.getElementById('registerBtn');
+const checklist = document.getElementById('passwordChecklist');
+
+function validatePassword(password) {
+  const requirements = {
+    length: password.length >= 12,
+    capital: /[A-Z]/.test(password),
+    number: /[0-9]/.test(password),
+    special: /[!@#$%^&*]/.test(password)
+  };
+
+  // Update checklist visual feedback
+  for (const requirement in requirements) {
+    const li = checklist.querySelector(`[data-requirement="${requirement}"]`);
+    if (requirements[requirement]) {
+      li.style.color = '#4CAF50';
+      li.style.fontWeight = 'bold';
+    } else {
+      li.style.color = '#666';
+      li.style.fontWeight = 'normal';
+    }
+  }
+
+  // Enable/disable submit button
+  registerBtn.disabled = !Object.values(requirements).every(Boolean);
+  if (registerBtn.disabled) {
+    registerBtn.style.opacity = '0.5';
+    registerBtn.style.cursor = 'not-allowed';
+  } else {
+    registerBtn.style.opacity = '1';
+    registerBtn.style.cursor = 'pointer';
+  }
+}
+
+passwordInput.addEventListener('input', (e) => validatePassword(e.target.value));
+</script>

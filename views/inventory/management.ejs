@@ -1,0 +1,15 @@
+<% if (messages() && messages().length > 0) { %>
+  <div class="flash-messages">
+    <%- messages() %>
+  </div>
+<% } %>
+
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } %>
+
+<p>Use the links below to add a new classification or a new inventory item.</p>
+<ul>
+  <li><a href="/inv/add-classification">Add Classification</a></li>
+  <li><a href="/inv/add-inventory">Add Inventory Item</a></li>
+</ul>
