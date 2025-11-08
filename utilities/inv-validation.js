@@ -44,10 +44,25 @@ validate.inventoryRules = () => {
     body("classification_id").trim().notEmpty().withMessage("Please choose a classification."),
     body("inv_make").trim().notEmpty().withMessage("Make is required."),
     body("inv_model").trim().notEmpty().withMessage("Model is required."),
-    body("inv_year").trim().isLength({ min: 4, max: 4 }).withMessage("Please provide a 4-digit year."),
+    // Year: require a 4-digit integer within a reasonable range
+    body("inv_year")
+      .trim()
+      .notEmpty()
+      .isInt({ min: 1886, max: new Date().getFullYear() + 1 })
+      .withMessage("Please provide a valid 4-digit year."),
     body("inv_description").trim().notEmpty().withMessage("Description is required."),
-    body("inv_price").trim().notEmpty().isFloat().withMessage("Price is required and must be a number."),
-    body("inv_miles").trim().notEmpty().isInt().withMessage("Miles is required and must be an integer."),
+    // Price: must be a floating point number >= 0
+    body("inv_price")
+      .trim()
+      .notEmpty()
+      .isFloat({ min: 0 })
+      .withMessage("Price is required and must be a number."),
+    // Miles: must be an integer >= 0
+    body("inv_miles")
+      .trim()
+      .notEmpty()
+      .isInt({ min: 0 })
+      .withMessage("Miles is required and must be an integer."),
     body("inv_color").trim().notEmpty().withMessage("Color is required."),
     // images and thumbnail are optional but sanitize
     body("inv_image").trim().escape().optional({ checkFalsy: true }),
