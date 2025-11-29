@@ -93,6 +93,25 @@ async function accountLogin(req, res) {
     return
   }
   try {
+    console.log("Account data retrieved:", {
+      email: accountData.account_email,
+      hasPassword: !!accountData.account_password,
+      passwordLength: accountData.account_password ? accountData.account_password.length : 0
+    })
+
+    // Check if password hash exists
+    if (!accountData.account_password) {
+      console.error("No password hash found for account:", account_email)
+      req.flash("notice", "Account data is incomplete. Please contact support.")
+      res.status(500).render("account/login", {
+        title: "Login",
+        nav,
+        errors: null,
+        account_email,
+      })
+      return
+    }
+
     if (await bcrypt.compare(account_password, accountData.account_password)) {
       // remove password before creating token
       delete accountData.account_password
@@ -112,11 +131,17 @@ async function accountLogin(req, res) {
         nav,
         errors: null,
         account_email,
-
       })
     }
   } catch (error) {
-    throw new Error('Access Forbidden')
+    console.error("Login error: ", error)
+    req.flash("notice", "Sorry, there was an error processing your login.")
+    res.status(500).render("account/login", {
+      title: "Login",
+      nav,
+      errors: null,
+      account_email,
+    })
   }
 }
 
