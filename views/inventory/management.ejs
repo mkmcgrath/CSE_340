@@ -13,3 +13,17 @@
   <li><a href="/inv/add-classification">Add Classification</a></li>
   <li><a href="/inv/add-inventory">Add Inventory Item</a></li>
 </ul>
+
+<h2>Manage Inventory</h2>
+<p>Select a classification from the list to see the items belonging to that classification.</p>
+
+<div class="form-group">
+  <label for="classificationList">Classification</label>
+  <%- classificationSelect %>
+</div>
+
+<table id="inventoryDisplay"></table>
+<noscript>JavaScript must be enabled to use this page.</noscript>
+
+<!-- Inventory AJAX script -->
+<script src="../../js/inventory.js"></script>

@@ -1,0 +1,41 @@
+<% if (messages() && messages().length > 0) { %>
+  <div class="flash-messages">
+    <%- messages() %>
+  </div>
+<% } %>
+
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } %>
+
+<p>Confirm Deletion - The delete is permanent.</p>
+
+<form action="/inv/delete" method="post">
+  <div class="form-group">
+    <label for="inv_make">Make</label>
+    <input type="text" id="inv_make" name="inv_make" readonly value="<%= locals.inv_make ? inv_make : '' %>">
+  </div>
+
+  <div class="form-group">
+    <label for="inv_model">Model</label>
+    <input type="text" id="inv_model" name="inv_model" readonly value="<%= locals.inv_model ? inv_model : '' %>">
+  </div>
+
+  <div class="form-group">
+    <label for="inv_year">Year</label>
+    <input type="text" id="inv_year" name="inv_year" readonly value="<%= locals.inv_year ? inv_year : '' %>">
+  </div>
+
+  <div class="form-group">
+    <label for="inv_price">Price</label>
+    <input type="text" id="inv_price" name="inv_price" readonly value="<%= locals.inv_price ? inv_price : '' %>">
+  </div>
+
+  <div class="form-group">
+    <button type="submit">Delete Vehicle</button>
+  </div>
+
+  <% if(locals.inv_id) { %>
+    <input type="hidden" name="inv_id" value="<%= inv_id %>">
+  <% } %>
+</form>
