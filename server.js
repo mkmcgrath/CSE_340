@@ -14,6 +14,7 @@ const session = require("express-session")
 const cookieParser = require("cookie-parser")
 const pool = require('./database/')
 const accountRoute = require("./routes/accountRoute.js")
+const reviewRoute = require("./routes/reviewRoute.js")
 const bodyParser = require("body-parser")
 // cookieParser already required above
 
@@ -91,6 +92,9 @@ app.use("/error", errorRoute)
 
 // Get the account route added
 app.use("/account", accountRoute)
+
+// Review routes
+app.use("/review", reviewRoute)
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {

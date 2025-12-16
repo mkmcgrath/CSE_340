@@ -21,3 +21,9 @@
     </dl>
   </section>
 <% } %>
+
+<!-- Reviews Section -->
+<%- include('../partials/reviews', { reviews, avgRating, reviewCount }) %>
+
+<!-- Add Review Form -->
+<%- include('../partials/review-form', { inv_id: vehicle.inv_id }) %>
