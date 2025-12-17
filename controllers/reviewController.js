@@ -10,7 +10,7 @@ reviewCont.addReview = async function (req, res, next) {
   const { inv_id, review_rating, review_text } = req.body
   const account_id = res.locals.accountData.account_id
 
-  const result = await reviewModel.addReview(inv_id, account_id, review_rating, review_text)
+  const result = await reviewModel.addReview(parseInt(inv_id), account_id, parseInt(review_rating), review_text)
 
   if (result && result.rowCount > 0) {
     req.flash("notice", "Your review was successfully added.")

@@ -279,7 +279,7 @@ invCont.getInventoryJSON = async (req, res, next) => {
  *  Build inventory detail view
  * ************************** */
 invCont.buildByInventoryId = async function (req, res, next) {
-  const inv_id = req.params.invId
+  const inv_id = parseInt(req.params.invId)
   const data = await invModel.getInventoryByInventoryId(inv_id)
   // data is expected as a single object
   const detail = await utilities.buildVehicleDetail(data)
